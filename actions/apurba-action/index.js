@@ -32,8 +32,8 @@ async function main (params) {
 
     // check for missing request input parameters and headers
     const requiredParams = [/* add required params */]
-    const requiredHeaders = ['Authorization']
-    const errorMessage = checkMissingRequestInputs(params, requiredParams, requiredHeaders)
+    //const requiredHeaders = ['Authorization']
+    const errorMessage = checkMissingRequestInputs(params, requiredParams)
     if (errorMessage) {
       // return and log client errors
       return errorResponse(400, errorMessage, logger)
@@ -41,16 +41,24 @@ async function main (params) {
 
     // extract the user Bearer token from the Authorization header
     const token = getBearerToken(params)
-
+//xml endpoints https://www.dataaccess.com/webservicesserver/NumberConversion.wso
+//xml body <?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><NumberToWords xmlns="http://www.dataaccess.com/webservicesserver/"><ubiNum>500</ubiNum></NumberToWords></soap:Body></soap:Envelope>
     // replace this with the api you want to access
-    const apiEndpoint = 'https://adobeioruntime.net/api/v1'
-
+    const apiEndpoint = 'https://ac283eu.adobesandbox.com/nl/jsp/soaprouter.jsp'
+let xmls='<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><Logon xmlns="urn:xtk:session"><sessiontoken>Anubhab.Sen/Anubhab.Sen</sessiontoken><strLogin>Anubhab.Sen</strLogin><strPassword>Anubhab.Sen</strPassword><elemParameters/></Logon></soap:Body></soap:Envelope>'
     // fetch content from external api endpoint
-    const res = await fetch(apiEndpoint)
+    const res = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'text/xml',
+          'SOAPAction': 'xtk:session#Logon'
+      },
+      body: xmls
+  });
     if (!res.ok) {
       throw new Error('request to ' + apiEndpoint + ' failed with status code ' + res.status)
     }
-    const content = await res.json()
+    const content = await res.text()
     const response = {
       statusCode: 200,
       body: content

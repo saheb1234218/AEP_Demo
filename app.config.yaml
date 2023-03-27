@@ -13,8 +13,8 @@ application:
             inputs:
               LOG_LEVEL: debug
             annotations:
-              require-adobe-auth: true
-              final: true
+              require-adobe-auth: false
+              final: false
           apurba-cloud:
             function: actions/apurba-cloud/index.js
             web: 'yes'
