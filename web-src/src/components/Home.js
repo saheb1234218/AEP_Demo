@@ -29,38 +29,14 @@ export const Home = () => {
   },
   ]
   const [show, setShow] = useState(false)
-   function dis(){
-    let url1 = `https://cors-anywhere.herokuapp.com/https://www.abplive.com/home/feed`;
-  axios.get(url1, {
-    headers: new Headers({
-      Accept: "text/html",
-      "content-type": "application/x-www-form-urlencoded",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT",
-      "Access-Control-Allow-Headers": "Content-Type",
-    }),
-    mode: "no-cors",
-  }).then((res)=>{
-    var xml = new XMLParser().parseFromString(res.data);
-    let news = xml.children[0].children;
-    console.log(news);
-  })
+   
 
-// axios.post('https://www.dataaccess.com/webservicesserver/NumberConversion.wso',
-//            xmls,
-//            {headers:
-//              {'Content-Type': 'text/xml',
-             
-//              'Access-Control-Allow-Origin': 'https://localhost:9080/'}
-//            }).then(res=>{
-//              console.log(res);
-//            }).catch(err=>{console.log(err)});
   
-   }
+   
   return (
     <View width='size-10000'>
       <div role="grid" className='d-flex'>
-        {show ? <FormShow /> : <>
+        {show ? <FormShow prev={()=>setShow(false)}/> : <>
           {
             cardData.map(x => {
               return (
@@ -71,7 +47,7 @@ export const Home = () => {
                     <MDBCardText>
 
                     </MDBCardText>
-                    <MDBBtn color='dark' onClick={() => dis()}>
+                    <MDBBtn color='dark' onClick={() => setShow(true)}>
                       Use Now
                     </MDBBtn>
                   </MDBCardBody>
