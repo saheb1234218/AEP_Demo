@@ -1,4 +1,23 @@
-html,body{
-    overflow-x: hidden;
+.xyz1,.xyz2{
+    cursor: pointer;
+    color: white;
 }
+#xyz2{
 
+    background-color: #ccccb3;
+}
+.list-group-item.active{
+    background-color: gray;
+    border: none;
+   
+}
+.left-item{
+    cursor: pointer;
+    
+}
+.left-item:hover{
+    background-color: rgb(212, 210, 210);
+}
+#back{
+    margin-left: 60px;
+}

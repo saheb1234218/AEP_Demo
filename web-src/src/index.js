@@ -11,6 +11,7 @@ import Runtime, { init } from '@adobe/exc-app'
 import App from './components/App'
 import './index.css'
 import "mdb-react-ui-kit/dist/css/mdb.min.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 window.React = require('react')
 /* Here you can bootstrap your application and configure the integration with the Adobe Experience Cloud Shell */

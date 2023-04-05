@@ -1,12 +1,14 @@
-/*
-* <license header>
-*/
+
+import set from "./images/settings.jpg";
+import user from "./images/user.png"
 
 import React, { useState } from 'react'
 import { Heading, View } from '@adobe/react-spectrum'
 import { Form, TextField, Checkbox } from '@adobe/react-spectrum'
 import FormShow from "./Form.jsx";
 import axios from "axios";
+import Settings from './Settings';
+
 import {
   MDBCard,
   MDBCardBody,
@@ -16,39 +18,45 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit';
 
+   
+
 
 
 export const Home = () => {
   const cardData = [{
-    "name": "Adobe Experience Platform",
-    "image": "https://yt3.ggpht.com/a/AGF-l79c3yXjA-ID1TRWFd71Pj4yUlOdXwoKAa4bQg=s900-c-k-c0xffffffff-no-rj-mo"
+    "name": "Profiles",
+    "image": user
   },
   {
     "name": "Settings",
-    "image": "https://i.pinimg.com/736x/27/8e/aa/278eaa134a686ab147b49a5cf6c3d4f9.jpg"
+    "image": set
   },
   ]
   const [show, setShow] = useState(false)
+  const [nameform,setNameform]=useState("");
    
 
   
    
   return (
     <View width='size-10000'>
-      <div role="grid" className='d-flex'>
-        {show ? <FormShow prev={()=>setShow(false)}/> : <>
+      <div role="grid" className='d-flex m-5 p-5'>
+        {show ? <>
+          {nameform=="Profiles"?<FormShow prev={()=>setShow(false)}/>:<Settings prev={()=>setShow(false)}/>}
+        </>  : <>
           {
             cardData.map(x => {
               return (
-                <MDBCard style={{ width: '250px', textAlign: 'center', marginRight: '70px' }}>
-                  <MDBCardImage width={200} style={{ height: '200px' }} src={x.image} position='top' alt='...' />
+                <MDBCard style={{ width: '220px', textAlign: 'center', marginRight: '70px' }}>
+                  <MDBCardImage width={150} style={{ height: '200px' }} src={x.image} position='top' alt='...' />
                   <MDBCardBody>
-                    <MDBCardTitle style={{ fontSize: '15px' }}>{x.name}</MDBCardTitle>
                     <MDBCardText>
 
                     </MDBCardText>
-                    <MDBBtn color='dark' onClick={() => setShow(true)}>
-                      Use Now
+                    <MDBBtn color='dark' onClick={() => {
+                      setNameform(x.name)
+                      setShow(true)}}>
+                      {x.name}
                     </MDBBtn>
                   </MDBCardBody>
                 </MDBCard>
@@ -62,3 +70,5 @@ export const Home = () => {
     </View>
   )
 }
+  
+export default Home;
