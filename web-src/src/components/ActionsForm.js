@@ -170,6 +170,7 @@ const ActionsForm = (props) => {
     let formattedResult = ''
     try {
       // invoke backend action
+      console.log(actionName,actions[actionName],headers,params);
       const actionResponse = await actionWebInvoke(actions[actionName], headers, params)
       formattedResult = `time: ${Date.now() - startTime} ms\n` + JSON.stringify(actionResponse, 0, 2)
       // store the response
